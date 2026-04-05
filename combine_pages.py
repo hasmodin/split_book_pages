@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 from pathlib import Path
 
 # 1. Path set up on Windows
@@ -27,6 +27,9 @@ def combine_to_pdf():
         try:
             img = Image.open(file_path)
             # PDF saving requires RGB mode (removes transparency/alpha if present)
+            # --- FIX: Apply EXIF rotation ---
+            # This checks the metadata and rotates the image if needed
+            img = ImageOps.exif_transpose(img)
             if(img.mode != "RGB"):
                 img = img.convert("RGB")
             image_list.append(img)
