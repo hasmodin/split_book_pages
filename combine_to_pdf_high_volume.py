@@ -2,6 +2,7 @@ import img2pdf
 from PIL import Image, ImageOps
 from pathlib import Path
 import os
+from natsort import natsorted
 
 def combine_to_pdf_high_volume():
     input_folder = Path("/mnt/c/Users/hasmodin.ansari/Downloads/split_results")
@@ -12,7 +13,11 @@ def combine_to_pdf_high_volume():
         print(f"Error: {input_folder} not found.")
         return
 
-    image_files = sorted(list(input_folder.glob("*.jpg")))
+    # image_files = sorted(list(input_folder.glob("*.jpg")))
+    # Replace the image_files line with this:
+    extensions = (".jpg", ".jpeg", ".JPG", ".JPEG")
+    image_files = sorted([p for p in input_folder.iterdir() if p.suffix in extensions])
+   
     print(f"Processing {len(image_files)} pages. This may take a moment...")
 
     # Create a temporary folder for rotated images
@@ -53,3 +58,4 @@ def combine_to_pdf_high_volume():
 
 if __name__ == "__main__":
     combine_to_pdf_high_volume()
+    
