@@ -14,7 +14,8 @@ def combine_to_pdf_high_volume():
         return
 
     # image_files = sorted(list(input_folder.glob("*.jpg")))
-    # Replace the image_files line with this:
+    
+    # if some pages with JPG or jpg use below line of coder or the above one
     extensions = (".jpg", ".jpeg", ".JPG", ".JPEG")
     image_files = sorted([p for p in input_folder.iterdir() if p.suffix in extensions])
    
